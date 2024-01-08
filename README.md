@@ -1,5 +1,5 @@
 <center>
-  <h1>Repositório com projetos e funções em linguagem C.</h1>
+  <h3>Repositório com projetos e funções em linguagem C.</h3>
 </center>
 
 <div align="center">
