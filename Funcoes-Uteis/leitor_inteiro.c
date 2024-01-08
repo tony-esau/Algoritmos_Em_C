@@ -5,29 +5,32 @@
 #include <io.h>// Define unicode "_O_U16TEXT"
 #include <fcntl.h>// _setmode
 
-//Define uma função defensiva  que só aceita espaços ou caracteres alfabéticos (acentuadas ou não).
-void leitor_caractere(wchar_t *string, int tamanho){
+
+//Define uma função defensiva  que só aceita inteiros.
+void leitor_inteiro(int *numero){
     int verificador = 0;
+    wchar_t auxiliar[1000];
     do
     {
-        fgetws(string,tamanho,stdin);
+        fgetws(auxiliar,1000,stdin);
         //Retira o \n vindo do teclado.
-        for(int i = 0; string[i] != L'\0'; i++){
-            if(string[i] == L'\n'){
-                string[i] = '\0'; 
+        for(int i = 0; auxiliar[i] != L'\0'; i++){
+            if(auxiliar[i] == L'\n'){
+                auxiliar[i] = '\0'; 
             }
         }
 
-        for(int i = 0;  string[i] != L'\0'; i++){
-            if( (iswalpha(string[i]) != 0) || (iswspace(string[i]) != 0) ){
+        for(int i = 0;  auxiliar[i] != L'\0'; i++){
+            if( iswdigit(auxiliar[i]) != 0){
                 verificador = 1;
             }else{
-                wprintf(L"Digite somente letras ou espaços.\n");
+                wprintf(L"Digite uma sequência numérica válida.\n");
                 verificador = 0;
                 break;
             }
         }  
     }while(verificador==0);
+    *numero = (int) wcstol(auxiliar,NULL,10);
 }
 
 
@@ -38,7 +41,8 @@ int main(){
     _setmode(_fileno(stdout),_O_U16TEXT);
     _setmode(_fileno(stderr),_O_U16TEXT);
 
-    wchar_t frase[100];
-    leitor_caractere(frase,100);
-    wprintf(L"A string digitada foi: %ls.",frase);
+    int num;
+    int *ptr_num = &num;
+    leitor_inteiro(ptr_num);
+    wprintf(L"O número digitado foi: %d.",num);
 }
