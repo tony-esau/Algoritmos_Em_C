@@ -3,4 +3,4 @@ Repositório com projetos e funções em linguagem C.
 
 [def]: readme.png
 
-convert readme.png -resize 200x200 readme.png
+convert readme.png -resize 100x100 readme.png
