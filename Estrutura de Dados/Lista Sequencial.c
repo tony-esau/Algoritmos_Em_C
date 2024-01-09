@@ -220,7 +220,6 @@ int main(){
         if(opcao == 1){
             wprintf(L"Digite a chave do nó:");
             leitor_inteiro(ptr_chave);
-            wprintf(L"%d",chave);
             lista = insere_lista(lista,chave);
         }else if(opcao == 2){
             wprintf(L"Digite a chave do nó que deseja editar:\n");
