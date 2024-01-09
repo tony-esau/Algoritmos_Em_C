@@ -36,7 +36,7 @@ void leitor_inteiro(int *numero){
     wchar_t auxiliar[100];
     do
     {
-        fgetws(auxiliar,1000,stdin);
+        fgetws(auxiliar,100,stdin);
         //Retira o \n vindo do teclado.
         for(int i = 0; auxiliar[i] != L'\0'; i++){
             if(auxiliar[i] == L'\n'){
