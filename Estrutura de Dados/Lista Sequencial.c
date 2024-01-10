@@ -166,7 +166,7 @@ Lista* remove_lista(Lista *lista, int chave){
         wprintf(L"Ainda não há nós na Lista.\n");
         return lista;
     }else if (auxiliar == -2){
-        wprintf(L"Nó com essa chave não está na lista\n");
+        wprintf(L"Nó com essa chave não está na lista.\n");
         return lista;
     }else{
         lista_aux = criar_lista(lista->memoria);
@@ -192,7 +192,7 @@ Lista* editar_no(Lista *lista, int chave){
         wprintf(L"Ainda não há nós na Lista.\n");
         return lista;
     }else if (auxiliar==-2){
-        wprintf(L"Nó com essa chave não está na lista\n");
+        wprintf(L"Nó com essa chave não está na lista.\n");
         return lista;
     }else{
         lista->dados[auxiliar] = ler_no(chave);
