@@ -8,8 +8,7 @@
 //Define uma função defensiva  que só aceita espaços ou caracteres alfabéticos (acentuadas ou não).
 void leitor_caractere(wchar_t *string, int tamanho){
     int verificador = 0;
-    do
-    {
+    do{
         fgetws(string,tamanho,stdin);
         //Retira o \n vindo do teclado.
         for(int i = 0; string[i] != L'\0'; i++){
@@ -27,7 +26,7 @@ void leitor_caractere(wchar_t *string, int tamanho){
                 break;
             }
         }  
-    }while(verificador==0);
+    }while(verificador == 0);
 }
 
 //Define uma função defensiva  que só aceita inteiros.
@@ -96,7 +95,7 @@ void destruir_lista(Lista *lista){
 //Realoca uma nova posição na memória da lista
 Lista* realoca_lista(Lista *lista, int n){
 	lista->dados = (Dados*) realloc(lista->dados,(lista->memoria+n)*sizeof(Dados));
-	if(lista->dados==NULL){
+	if(lista->dados == NULL){
 		wprintf(L"Falha de memória! Encerrando programa...");
 		exit(1);
 	}
@@ -128,6 +127,19 @@ Dados ler_no(int chave){
 	return auxiliar;
 }
 
+//Imprime os dados da lista
+void imprime_lista(Lista *lista){
+    if(lista->n_nos != 0){
+        for(int i=0;i<(lista->n_nos);i++){
+		printf("----------*----------\n");
+		wprintf(L"[Nome:%ls.\n",lista->dados[i].nome);
+		wprintf(L"Chave:%d]\n",lista->dados[i].chave);
+        }
+    }else{
+        wprintf(L"Ainda não há nós na lista!\n");
+    }
+}	
+
 //Insere um elemento na lista
 Lista* insere_lista(Lista *lista, int chave){
 	if((lista->n_nos)<(lista->memoria)){
@@ -135,14 +147,42 @@ Lista* insere_lista(Lista *lista, int chave){
 			wprintf(L"O elemento de chave %d já está na lista!\n",chave);
 		}else{
 			lista->dados[lista->n_nos] = ler_no(chave);
-			lista->n_nos+=1;
+			lista->n_nos++;
             wprintf(L"Nó alocado com sucesso!\n");
 			return lista;
 		}
 	}else{
 		wprintf(L"Não há mais espaço na lista!\n");
+        wprintf(L"Número de espaços atual: %d.\n",lista->memoria);
 	}
     return lista;
+}
+
+//Remove um nó da lista
+Lista* remove_lista(Lista *lista, int chave){
+    int auxiliar = busca_lista(lista, chave);
+    Lista *lista_aux;
+    if(auxiliar == -1){
+        wprintf(L"Ainda não há nós na Lista.\n");
+        return lista;
+    }else if (auxiliar == -2){
+        wprintf(L"Nó com essa chave não está na lista\n");
+        return lista;
+    }else{
+        lista_aux = criar_lista(lista->memoria);
+        for(int i = auxiliar; i < lista->n_nos-1; i++){
+            lista->dados[i] = lista->dados[i+1];
+        }  
+        if (auxiliar != 0){
+            for(int i = 0; i <= auxiliar+1 ; i++){
+            lista_aux->dados[i] = lista->dados[i];
+            lista_aux->n_nos++;
+            }
+        }
+        destruir_lista(lista);
+        wprintf(L"Nó removido com sucesso!\n");
+    }
+    return lista_aux;
 }
 
 //Edita um nó da lista pela chave
@@ -161,29 +201,17 @@ Lista* editar_no(Lista *lista, int chave){
     return lista;
 }
 
-//Imprime os dados da lista
-void imprime_lista(Lista *lista){
-    if(lista->n_nos != 0){
-        for(int i=0;i<(lista->n_nos);i++){
-		printf("----------*----------\n");
-		wprintf(L"[Nome:%ls.\n",lista->dados[i].nome);
-		wprintf(L"Chave:%d]\n",lista->dados[i].chave);
-        }
-    }else{
-        wprintf(L"Ainda não há nós na lista!\n");
-    }
-}	
-
 void imprime_menu(){
     wprintf(L"----------*OPÇÕES*-----------\n");
-    wprintf(L"-1: Inserir na Lista ........\n");
-    wprintf(L"-2: Editar nó da Lista.......\n");
-    wprintf(L"-3: Busca por Chave .........\n");
-    wprintf(L"-4: Realocar a Lista ........\n");
-    wprintf(L"-5: Imprimir Lista ..........\n");
-    wprintf(L"-6: Destruir Lista ..........\n");
-    wprintf(L"-7: Limpar tela .............\n");
-    wprintf(L"-8: Sair do Programa ........\n");
+    wprintf(L"-1: Inserir nó da Lista .....\n");
+    wprintf(L"-2: Remover nó da Lista......\n");
+    wprintf(L"-3: Editar nó da Lista.......\n");
+    wprintf(L"-4: Busca por Chave .........\n");
+    wprintf(L"-5: Realocar a Lista ........\n");
+    wprintf(L"-6: Imprimir Lista ..........\n");
+    wprintf(L"-7: Destruir Lista ..........\n");
+    wprintf(L"-8: Limpar tela .............\n");
+    wprintf(L"-9: Sair do Programa ........\n");
 }
 
 Lista *lista;
@@ -211,22 +239,26 @@ int main(){
         exit(1);
     }
 
-    while (opcao != 8)
+    while (opcao != 9)
     {
         imprime_menu();
         wprintf(L"Digite a opção:");
         leitor_inteiro(ptr_opcao);
 
         if(opcao == 1){
-            wprintf(L"Digite a chave do nó:");
+            wprintf(L"Digite a chave do nó que deseja inserir:\n");
             leitor_inteiro(ptr_chave);
             lista = insere_lista(lista,chave);
         }else if(opcao == 2){
+            wprintf(L"Digite a chave do nó que deseja remover:\n");
+            leitor_inteiro(ptr_chave);
+            lista = remove_lista(lista,chave);
+        }else if(opcao == 3){
             wprintf(L"Digite a chave do nó que deseja editar:\n");
             leitor_inteiro(ptr_chave);
             editar_no(lista,chave);
         }
-        else if(opcao == 3){
+        else if(opcao == 4){
             int auxiliar;
             wprintf(L"Digite a chave do nó:");
             leitor_inteiro(ptr_chave);
@@ -238,16 +270,16 @@ int main(){
             }else{
                  wprintf(L"Elemento com chave %d está no índice %d.\n",chave,auxiliar);
             }
-        }else if(opcao == 4){
+        }else if(opcao == 5){
             int espaco;
             int *ptr_espaco = &espaco;
             wprintf(L"Digite quantos espaços novos deseja alocar:");
             leitor_inteiro(ptr_espaco);
             lista = realoca_lista(lista,espaco);
             wprintf(L"Lista realocada com sucesso!\n");
-        }else if(opcao == 5){
-            imprime_lista(lista);
         }else if(opcao == 6){
+            imprime_lista(lista);
+        }else if(opcao == 7){
             destruir_lista(lista);
             wprintf(L"Lista destruída com sucesso!\n");
             wprintf(L"Deseja criar uma nova Lista? (1:Sim|0:Não)\n");
@@ -260,9 +292,9 @@ int main(){
                 wprintf(L"Obrigado por utilizar o programa :)...");
               exit(1);
             }
-        }else if(opcao == 7){
-            system("cls");
         }else if(opcao == 8){
+            system("cls");
+        }else if(opcao == 9){
             wprintf(L"Obrigado por utilizar o programa :)...");
         }else{
             wprintf(L"Opção inválida!\n");
@@ -271,3 +303,4 @@ int main(){
 
 	return 0;
 }
+
