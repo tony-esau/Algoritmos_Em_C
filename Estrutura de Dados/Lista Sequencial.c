@@ -158,7 +158,7 @@ Lista* insere_lista(Lista *lista, int chave){
     return lista;
 }
 
-//Remove um nó da lista
+//Remove um nó da lista pela chave
 Lista* remove_lista(Lista *lista, int chave){
     int auxiliar = busca_lista(lista, chave);
     Lista *lista_aux;
@@ -173,8 +173,8 @@ Lista* remove_lista(Lista *lista, int chave){
         for(int i = auxiliar; i < lista->n_nos-1; i++){
             lista->dados[i] = lista->dados[i+1];
         }  
-        if (auxiliar != 0){
-            for(int i = 0; i <= auxiliar+1 ; i++){
+        if(auxiliar != 0){
+            for(int i = 0; i < lista->n_nos-1; i++){
             lista_aux->dados[i] = lista->dados[i];
             lista_aux->n_nos++;
             }
