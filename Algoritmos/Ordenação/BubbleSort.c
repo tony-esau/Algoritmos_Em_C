@@ -15,19 +15,17 @@ void printa_vetor(int *vetor, int tamanho){
 }
 
 //Faz uma troca simples com uso de um auxiliar
-int* troca(int *vetor, int indice){
+void troca(int *vetor, int indice){
     int auxiliar = vetor[indice];
     vetor[indice] = vetor [indice+1];
     vetor[indice+1] = auxiliar;
-
-    return vetor;
 }
 
 /*
 Algoritmo BubbleSort 
 Complexidade: n^2-n, da ordem de O(n^2).
 */
-int* BubbleSort(int *vetor, int tamanho){
+void BubbleSort(int *vetor, int tamanho){
     for(int i = 0; i < tamanho; i++){
         for(int j = 0; j < tamanho-1; j++){
             if(vetor[j]>vetor[j+1]){
@@ -35,8 +33,6 @@ int* BubbleSort(int *vetor, int tamanho){
             } 
         }
     }
-
-    return vetor;
 }
 
 
@@ -46,7 +42,13 @@ int main(){
     printf("Digite o tamanho do Vetor:\n");
     scanf("%d",&tamanho);
 
-    int *vetor = (int*)(malloc(tamanho*sizeof(int)));
+    int *vetor = (int*)(malloc(tamanho*sizeof(int)));   
+
+    //Programação defensiva
+    if(vetor == NULL){
+        printf("Erro de Memória...");
+        exit(1);
+    }
 
     printf("Digite os valores:\n");
     for (int i = 0; i < tamanho; i++){
@@ -58,7 +60,7 @@ int main(){
     printf("Vetor digitado:\n");
     printa_vetor(vetor,tamanho);
 
-    vetor = BubbleSort(vetor,tamanho);
+    BubbleSort(vetor,tamanho);
 
     printf("Vetor ordenado:\n");
     printa_vetor(vetor,tamanho);
