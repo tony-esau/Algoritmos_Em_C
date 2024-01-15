@@ -43,7 +43,7 @@ int* BubbleSort(int *vetor, int tamanho){
 int main(){
     int tamanho;
 
-    printf("Digite o tamanho do Vetor\n");
+    printf("Digite o tamanho do Vetor:\n");
     scanf("%d",&tamanho);
 
     int *vetor = (int*)(malloc(tamanho*sizeof(int)));
