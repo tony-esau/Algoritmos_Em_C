@@ -71,20 +71,20 @@ void imprime_pilha(No *topo){
         int i = 0;
         while(topo != NULL){
             if(i == 0 && ((topo->ptr_abaixo) != NULL)){
-                printf("[Nome:%s. <-- Topo\n",topo->dados->nome);
+                printf("\n[Nome:%s. <-- Topo\n",topo->dados->nome);
                 printf("Chave:%d.]\n",topo->dados->chave);
-                printf("   |   \n");
+                printf("\n   |   \n");
                 printf("   v   \n");
             }else if(i == 0 && ((topo->ptr_abaixo) == NULL)){
-                printf("[Nome:%s. <-- Topo\n",topo->dados->nome);
+                printf("\n[Nome:%s. <-- Topo\n",topo->dados->nome);
                 printf("Chave:%d.]\n",topo->dados->chave);
             }else if((topo->ptr_abaixo) == NULL){
-                printf("[Nome:%s.\n",topo->dados->nome);
+                printf("\n[Nome:%s.\n",topo->dados->nome);
                 printf("Chave:%d.]\n",topo->dados->chave);
             }else{
-                printf("[Nome:%s.\n",topo->dados->nome);
+                printf("\n[Nome:%s.\n",topo->dados->nome);
                 printf("Chave:%d.]\n",topo->dados->chave);
-                printf("   |   \n");
+                printf("\n   |   \n");
                 printf("   v   \n");
             }
             i++;
@@ -94,7 +94,7 @@ void imprime_pilha(No *topo){
 }
 
 void imprime_menu(){
-    printf("----------Opções----------\n");
+    printf("\n----------Opções----------\n");
     printf("1-Empilhar................\n");
     printf("2-Desempilhar.............\n");
     printf("3-Imprimir Pilha..........\n");
@@ -120,19 +120,22 @@ int main(){
 
     do{
         imprime_menu();
-        printf("Digite a opçãoo:\n");
+        printf("Digite a opção:\n");
         scanf("%d",&verificador);
         fflush(stdin);
 
         if(verificador == 1){
             push(ptr_topo);
+            printf("\nNó empilhado com sucesso.\n");
         }else if(verificador == 2){
             pop(ptr_topo);
+            printf("\nNó desempilhado com sucesso.\n");
         }else if(verificador == 3){
             imprime_pilha(topo);
         }else if(verificador == 4){
             system("cls"); //"clear" em ambientes Linux
         }else if(verificador == 5){
+            system("cls"); 
             printf("Obrigado por utilizar...");
             exit(1);
         }else{
