@@ -105,7 +105,7 @@ void imprime_menu(){
 int main(){
     setlocale(LC_ALL,"Portuguese");
 
-    No *topo = NULL;
+    No *topo;
     No **ptr_topo = &topo;
 
     int verificador;
