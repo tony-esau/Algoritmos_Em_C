@@ -2,21 +2,25 @@
 #include <stdlib.h>
 #include <locale.h>
 
+//Estrutura de Dados.
 typedef struct Dados_de_No{
     char nome[50];
     int chave;
 }Dados;
 
+//Estrutura que define um nó.
 typedef struct No_de_pilha{
     Dados *dados;
     struct No_de_pilha *ptr_abaixo;
 }No;
 
+//Cria a pilha, inicialmente é um ponteiro para NULL.
 No* cria_pilha(){
     No *auxiliar = NULL;
     return auxiliar;
 }
 
+//Função de ler os dados de um nó.
 No* ler_dados(No *topo){
     topo = (No*) malloc(sizeof(No));
     if(topo == NULL){
@@ -24,13 +28,14 @@ No* ler_dados(No *topo){
         return NULL;
     }
     topo->dados = (Dados*) malloc(sizeof(Dados));
-     if(topo == NULL){
+     if(topo->dados == NULL){
         printf("Não foi possivel alocar memória para os dados do nó.");
         return NULL;
     }
 
     printf("Digite o nome:");
     fgets(topo->dados->nome,50,stdin);
+    //Retira o '\n' da string;
     for(int i = 0; (topo->dados->nome[i]) != '\0'; i++){
         if(topo->dados->nome[i] == '\n'){
             topo->dados->nome[i] = '\0';
@@ -44,6 +49,7 @@ No* ler_dados(No *topo){
     return topo;
 }
 
+//Função de Empilhar um nó.
 void push(No **ptr_topo){
     No* auxiliar = ler_dados(*ptr_topo);
     if(auxiliar == NULL){
@@ -54,19 +60,20 @@ void push(No **ptr_topo){
     }
 }
 
+//Função de desempilhar um nó.
 void pop(No **ptr_topo){
     if(*ptr_topo != NULL){
         No *auxiliar = *ptr_topo;
         *ptr_topo = auxiliar->ptr_abaixo;
         free(auxiliar);
     }else{
-        printf("Ainda não há nós na pilha.\n");
+        printf("\nAinda não há nós na pilha.\n");
     }
 }
 
 void imprime_pilha(No *topo){
     if(topo == NULL){
-        printf("Ainda não há nós na pilha.\n");
+        printf("\nAinda não há nós na pilha.\n");
     }else{
         int i = 0;
         while(topo != NULL){
