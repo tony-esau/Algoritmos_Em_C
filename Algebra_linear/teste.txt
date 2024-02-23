@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+int main() {
+  Matriz matriz = criar_matriz();
+  matriz = preencher_matriz(matriz);
+  printar_matriz(matriz);
+}
