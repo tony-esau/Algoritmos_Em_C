@@ -100,10 +100,11 @@ Matriz* multiplica_matriz(Matriz *matriz1, Matriz *matriz2) {
             for(int j = 0; j < matriz_produto->n_colunas; j++){
                 matriz_produto->matriz[i][j] = 0;
                 for(int k = 0; k < matriz1->n_colunas; k++){ 
-                    matriz_produto->matriz[i][j] += matriz2->matriz[i][k] * matriz1->matriz[k][j];
+                    matriz_produto->matriz[i][j] += matriz1->matriz[i][k] * matriz2->matriz[k][j];
                 }
             }
         }
+        
         if(matriz_produto->n_linhas == matriz_produto->n_colunas){
             matriz_produto->quadrada = 1;
         }else{
