@@ -136,9 +136,17 @@ void simula_execucao(int tempo_total){
     printf("\n");
 }
 
+void limpa_tela(){
+    #ifdef _WIN64
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 //Faz uma simulação sobre a remoção sucessiva dos processos da Fila.
 void simulacao(Sentinela *Lista_Processos){
-    system("cls");
+    limpa_tela();
     if((*Lista_Processos) == NULL){
         printf("Impossível realizar simulação. Fila Vazia!");
     }else{
@@ -173,14 +181,6 @@ void imprime_menu(){
     printf("4-Limpar Tela...............\n");
     printf("5-Iniciar Simulação.........\n");
     printf("6-Sair......................\n");
-}
-
-void limpa_tela(){
-    #ifdef _WIN64
-        system("cls");
-    #else
-        system("clear");
-    #endif
 }
 
 int main() {
