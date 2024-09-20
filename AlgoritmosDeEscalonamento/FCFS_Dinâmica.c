@@ -157,9 +157,17 @@ void simula_execucao(int tempo_total){
     printf("\n");
 }
 
+void limpa_tela(){
+    #ifdef _WIN64
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 //Faz uma simulação sobre a remoção sucessiva dos processos da Fila.
 void simulacao(Sentinela *Fila_Processos){
-    system("cls");
+    limpa_tela();
     if(Fila_Processos->Ptr_Inicio == NULL){
         printf("Impossível realizar simulação. Fila Vazia!");
     }else{
@@ -197,14 +205,6 @@ void imprime_menu(){
     printf("6-Sair......................\n");
 }
 
-void limpa_tela(){
-    #ifdef _WIN64
-        system("cls");
-    #else
-        system("clear");
-    #endif
-}
-
 int main() {
     setlocale(LC_ALL, "Portuguese");//Define caracteres em Português.
     Sentinela *Fila_Processos;
@@ -236,6 +236,5 @@ int main() {
     }
    return 0;
 }
-
 
 
