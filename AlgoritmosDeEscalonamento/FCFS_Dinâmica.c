@@ -7,7 +7,7 @@
 #include <locale.h> //Para permitir printar caracteres em português.
 #define Velocidade_Processamento 1000 //Bytes/s, por didática.
 
-//Define processo, com seu ID, tamanho e Tempo de execução.
+//Define processo, com seu ID, Tamanho e Tempo de execução.
 typedef struct processo{
     int Tamanho;
     int Tempo;
