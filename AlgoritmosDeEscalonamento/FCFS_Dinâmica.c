@@ -191,7 +191,7 @@ void imprime_menu(){
     printf("\n----------Opções----------\n");
     printf("1-Inserir Processo..........\n");
     printf("2-Remover Processo..........\n");
-    printf("3-Imprimir PRocesso(s)......\n");
+    printf("3-Imprimir Processo(s)......\n");
     printf("4-Limpar Tela...............\n");
     printf("5-Iniciar Simulação.........\n");
     printf("6-Sair......................\n");
