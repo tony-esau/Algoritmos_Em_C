@@ -197,6 +197,14 @@ void imprime_menu(){
     printf("6-Sair......................\n");
 }
 
+void limpa_tela(){
+    #ifdef _WIN64
+    system("cls");
+    #else
+    system("clear");
+    #endif
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");//Define caracteres em Português.
     Sentinela *Fila_Processos;
@@ -217,7 +225,7 @@ int main() {
             system("cls");
             imprimir_fila(Fila_Processos);
         }else if(verificador == 4){
-            system("cls");
+            limpa_tela();
         }else if(verificador == 5){
             simulacao(Fila_Processos);
         }else if(verificador == 6){
