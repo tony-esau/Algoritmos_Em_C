@@ -217,7 +217,7 @@ int main() {
     while(verificador != 6){
         imprime_menu();
         scanf("%d",&verificador);
-        fflush(stdin);
+        getchar();
 
         if(verificador == 1){
             inserir_processo(Lista_Processos);
