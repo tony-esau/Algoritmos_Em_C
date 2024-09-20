@@ -7,7 +7,7 @@
 #include <locale.h> //Para permitir printar caracteres em português.
 #define Velocidade_Processamento 1000 //Bytes/s, por didática.
 
-//Define processo, com seu ID, Tamanho e Tempo de execução.
+//Define processo, com seu ID, tamanho e Tempo de execução.
 typedef struct processo{
     int Tamanho;
     int Tempo;
@@ -56,7 +56,7 @@ void destruir(Sentinela *Fila_Processos) {
 
 //Retorna o tamanho da fila, função auxiliar;
 int tamanho(Sentinela *Fila_Processos) {
-    if (Fila_Processos->Ptr_Inicio == NULL) {
+    if (Fila_Processos->Ptr_Inicio == Fila_Processos->Ptr_Fim) {
         return 0;
     }
     int contador = 0;
@@ -171,13 +171,16 @@ void simulacao(Sentinela *Fila_Processos){
             printf("\nConfiguração atual da fila é:\n");
             sleep(2);
             imprimir_fila(Fila_Processos);
+            sleep(3);
+            printf("Removendo processo de Id: %d\n",Ptr_Navegante->processo.Id);
             sleep(2);
-            printf("Removendo processo de Id: %d",Ptr_Navegante->processo.Id);
-            //O tempo de remoção será o tempo de execução por questão de didática.
-            simula_execucao(Ptr_Navegante->processo.Tempo);
+            int tempo_execucao = Ptr_Navegante->processo.Tempo;
             Ptr_Navegante = Ptr_Navegante->Ptr_Proximo;
             remover_processo(Fila_Processos);
-            printf("Processo removido com sucesso!\n");
+            printf("<Processo removido com sucesso!>\n");
+            printf("Executando processo");
+            simula_execucao(tempo_execucao);
+            printf("<Processo executado com sucesso!>\n");
         }
         printf("Simulação encerrada.");
     }
