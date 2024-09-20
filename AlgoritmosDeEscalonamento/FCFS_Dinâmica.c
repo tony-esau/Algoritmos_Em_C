@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h> //Para usar sleep.
+#include <termios.h> //Cabeçalho de manipulação de terminal, usada para fazer função espera.
 #include <locale.h> //Para permitir printar caracteres em português.
 #define Velocidade_Processamento 1000 //Bytes/s, por didática.
 
@@ -165,6 +166,27 @@ void limpa_tela(){
     #endif
 }
 
+void espera() {
+    struct termios config_atual, config_nova;
+    char c;
+
+    // Salva as configurações antigas do terminal.
+    tcgetattr(STDIN_FILENO, &config_atual);
+    config_nova = config_atual;
+
+    // Desativa o eco e as configurações de entrada.
+    config_nova.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &config_nova);
+
+    printf("Pressione qualquer tecla para continuar...\n");
+
+    // Espera por uma entrada de tecla.
+    read(STDIN_FILENO, &c, 1);
+
+    // Restaura as configurações antigas do terminal.
+    tcsetattr(STDIN_FILENO, TCSANOW, &config_atual);
+}
+
 //Faz uma simulação sobre a remoção sucessiva dos processos da Fila.
 void simulacao(Sentinela *Fila_Processos){
     limpa_tela();
@@ -190,7 +212,8 @@ void simulacao(Sentinela *Fila_Processos){
             simula_execucao(tempo_execucao);
             printf("<Processo executado com sucesso!>\n");
         }
-        printf("Simulação encerrada.");
+        printf("<Simulação encerrada>\n");
+        espera();
     }
 }
 
@@ -215,7 +238,7 @@ int main() {
     while(verificador != 6){
         imprime_menu();
         scanf("%d",&verificador);
-        fflush(stdin);
+        getchar();
 
         if(verificador == 1){
             inserir_processo(Fila_Processos);
@@ -236,5 +259,4 @@ int main() {
     }
    return 0;
 }
-
 
