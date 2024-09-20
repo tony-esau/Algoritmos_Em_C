@@ -192,7 +192,7 @@ void simulacao(Sentinela *Lista_Processos){
             simula_execucao(tempo_execucao);
             printf("<Processo executado com sucesso!>\n");
         }
-        printf("<Simulação encerrada.>\n");
+        printf("<Simulação encerrada>\n");
         espera();
     }
 }
