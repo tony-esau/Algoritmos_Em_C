@@ -132,7 +132,7 @@ void imprimir_fila(Sentinela *Fila_Processos){
     if(Fila_Processos->Ptr_Inicio != NULL){
         No_Processo *Ptr_Navegante = Fila_Processos->Ptr_Inicio;
         while(Ptr_Navegante != NULL){
-            printf("[\nId:%d, \n Tamanho:%d Bytes, \n Tempo :%d s\n]\n",
+            printf("[\nId:%d, \n Tamanho:%d Bytes, \n Tempo de Execução:%d s\n]\n",
             Ptr_Navegante->processo.Id,
             Ptr_Navegante->processo.Tamanho,
             Ptr_Navegante->processo.Tempo
