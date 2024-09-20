@@ -199,9 +199,9 @@ void imprime_menu(){
 
 void limpa_tela(){
     #ifdef _WIN64
-    system("cls");
+        system("cls");
     #else
-    system("clear");
+        system("clear");
     #endif
 }
 
