@@ -22,7 +22,7 @@ int dia_zeller(int dia, int mes, int ano) {
     int j = ano / 100;
     int h = q + (13 * (m + 1)) / 5 + k + (k / 4) + (j / 4) + (5 * j);
     h = h % 7;
-    return (h + 6) % 7; // Ajuste para o formato desejado
+    return (h + 6) % 7; // Ajuste para o formato desejado.
 }
 
 //Verifica quantos dias tem no mês atual.
@@ -94,8 +94,8 @@ void printar_calendario() {
     }
 
     int dia_atual = infotempo->tm_mday;
-  
-    printf("%21s\n",nomes_dias[dia_semana]);
+      
+    printf("%21s\n",nomes_dias[infotempo->tm_wday]);
     printf("---------%s %d, %d---------\n",nomes_meses[mes_atual-1],dia_atual,ano_atual);
 
     // Imprime o calendário.
@@ -107,7 +107,7 @@ void printar_calendario() {
                 if (calendario[i][j] == -1) {
                     printf("     "); // Espaço para dias não preenchidos (= -1)
                 } else {
-                    if(calendario[i][j] == infotempo->tm_mday){
+                    if(calendario[i][j] == dia_atual){
                         printf("\033[31m%4d\033[0m ", calendario[i][j]); //Dia de hoje com coloração de terminal.
                     }else{
                         printf("%4d ", calendario[i][j]); //Demais dias.
@@ -123,4 +123,3 @@ int main() {
     printar_calendario();
     return 0;
 }
-
