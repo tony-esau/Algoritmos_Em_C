@@ -113,6 +113,45 @@ char *descriptografar(char *msg_encriptografada, int *chave){
     return msg_descriptografada;
 }
 
+/*Essa função lê uma chave binária guardada num arquivo e faz o retorno de uma chave válida utilizável.
+É útil caso o usuário tenho uma mensagem encriptografada e a chave correspondente num arquivo.*/
+int* ler_chave() {
+    FILE *arquivo = fopen("chave.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo chave.txt.\n");
+        return NULL;
+    }
+
+    int tamanho = 0;
+    // Conta a quantidade de caracteres no arquivo.
+    while (fgetc(arquivo) != EOF) {
+        tamanho++;
+    }
+
+    // Aloca memória para a chave.
+    int *chave = (int*)malloc(tamanho * sizeof(int));
+    if (chave == NULL) {
+        printf("Erro ao alocar memória.\n");
+        fclose(arquivo);
+        return NULL;
+    }
+
+    // Volta ao início do arquivo para ler os valores.
+    rewind(arquivo); 
+
+    for (int i = 0; i < tamanho; i++) {
+        if (fscanf(arquivo, "%1d", &chave[i]) != 1) { 
+            printf("Erro ao ler o arquivo.\n");
+            free(chave);
+            fclose(arquivo);
+            return NULL;
+        }
+    }
+
+    fclose(arquivo);
+    return chave;
+}
+
 int main() {
     srand(time(NULL)); // Inicialização da seed para função rand.
     char msg[] = "This is a message encrypted with a OTP.";
