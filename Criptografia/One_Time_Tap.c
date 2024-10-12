@@ -1,6 +1,6 @@
 //Autor: Tony Esaú de Oliveira© CC
 //11/10/2024
-//Implementa um algoritmo que simula a encriptação de uma mensagem de cracteres ASCII feita por um método OTP (One Time Tap).
+//Implementa um algoritmo que simula a encriptação de uma mensagem em caracteres ASCII feita por um método OTP (One Time Tap).
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,9 +11,17 @@ int* char_binario(char *msg, int tamanho) {
     int *binario = (int*)malloc(tamanho * 8 * sizeof(int));
     if (binario == NULL) { return NULL; }
 
+    //Para cada caractere, transforma-o no seu binário correspondente, armazenando no vetor;
     for (int i = 0; i < tamanho; i++) {
+        //Laço começa do 7 para atribuir bits começando do menos significativo;
         for (int j = 7; j >= 0; j--) {
             binario[i * 8 + (7 - j)] = (msg[i] >> j) & 1;
+            /*
+                - i * 8 calcula o endereço do próximo caractere;
+                - +(7-j) calcula o endereço do bit atual;
+                - msg[i] >> j, desloca os bits do caractere atual do bit menos significativo até o mais significativo.
+                - & 1 : uma máscara, se após o deslocamento, o último bit deslocado = 1, então atribui, senão 0;
+            */
         }
     }
 
