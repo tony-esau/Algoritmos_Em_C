@@ -74,11 +74,22 @@ int* one_time_pad(char *msg, char **msg_encriptografada) {
     free(msg_binario);
     free(binario_encriptografado);
 
+    FILE *arquivo = fopen("chave.txt", "w");
+    if (arquivo == NULL) {
+        printf("Erro ao criar o arquivo.\n");
+    }else{
+        //Salva chave para distribuição particular;
+        for(int i = 0; i < 8 * tamanho;i++){
+        fprintf(arquivo, "%d", chave[i]);
+        }
+    }
+
     return chave;
 }
 
 //Descriptografa aplicando a chave;
 char *descriptografar(char *msg_encriptografada, int *chave){
+    if(chave == NULL){return NULL;}
     int tamanho = 0;
     while (msg_encriptografada[tamanho] != '\0') {
         tamanho++;
@@ -96,10 +107,11 @@ char *descriptografar(char *msg_encriptografada, int *chave){
     free(binario_encriptografado);
     free(binario_descriptografado);
 
+    //Destrói a chave após o uso.
+    free(chave);
+    
     return msg_descriptografada;
 }
-
-
 
 int main() {
     srand(time(NULL)); // Inicialização da seed para função rand.
@@ -114,7 +126,6 @@ int main() {
     printf("Mensagem decriptografada: %s\n", msg_descriptografada);
 
     free(msg_encriptografada);
-    free(chave);
 
     return 0;
 }
