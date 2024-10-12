@@ -30,16 +30,26 @@ int* char_binario(char *msg, int tamanho) {
 
 //Transforma um vetor de inteiro com a mensagem binária em um vetor de char com a mensagem correspondente.
 char* binario_char(int *binario, int tamanho) {
+    //Número de caracteres;
     int tamanho_msg = tamanho / 8;
+    // +1 para caractere nulo.
     char *msg = (char *)malloc((tamanho_msg + 1) * sizeof(char));
     if (msg == NULL) { return NULL; }
 
+    //Para cada caractere que será gerado.
     for (int i = 0; i < tamanho_msg; i++) {
-        char c = 0;
+        char auxiliar = 0;
         for (int j = 0; j < 8; j++) {
-            c = (c << 1) | binario[i * 8 + j];
+            /*
+                - << 1, desloca sempre um bit para a esquerda para que ao final os bits significativos estejam na posição correta.
+                - | binario[i * 8 + j], faz um or caso o bit atual seja 1, garantindo que os significativos sejam inseridos.
+            */
+            auxiliar = auxiliar << 1;
+            if(binario[i * 8 + j] == 1){
+                auxiliar = auxiliar | binario[i * 8 + j];
+            }
         }
-        msg[i] = c;
+        msg[i] = auxiliar;
     }
     msg[tamanho_msg] = '\0';
 
