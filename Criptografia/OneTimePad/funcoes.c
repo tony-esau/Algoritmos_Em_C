@@ -292,6 +292,7 @@ void inicia_app(){
 
 void imprime_menu(int *opcao){
 	limpa_tela();
+    int aux;
 	char *mensagem;
 	printf("--------------------Menu-------------------\n");
 	printf("- 1. Encriptografar Mensagem do Teclado...-\n");
@@ -300,7 +301,7 @@ void imprime_menu(int *opcao){
     printf("- 4. Sair.................................-\n");
 	printf("- Digite a sua opção:                     -\n");
 	printf("-------------------------------------------\n");
-	scanf("%d", opcao);
+	aux = scanf("%d", opcao);
 	limpa_tela();
 	if(*opcao == 1){
 		char *msg_retorno;
@@ -394,10 +395,12 @@ void imprime_menu(int *opcao){
         printf("+ mente uma única vez.                        +\n");
         printf("+++++++++++++++++++++++++++++++++++++++++++++++\n");
         espera();
-    }else if(*opcao != 4){
+    }else if(*opcao != 4 || aux == 0){
+        while(getchar()!= '\n')
+        *opcao = aux;
 		printf("    _____________________________________\n");
 	    printf("   /                                     \\\n");
-	    printf("  |              Opção Inválida           |\n");
+	    printf("  |              Opção Inválida!          |\n");
 	    printf("   \\_____________________________________/\n");
 	    printf("          \\\n");
 	    printf("           \\   .--.\n");
