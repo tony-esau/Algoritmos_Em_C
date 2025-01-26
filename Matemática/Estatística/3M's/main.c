@@ -1,3 +1,8 @@
+//Autor: Tony Esaú de Oliveira© CC
+//25/01/2025
+/*Implementa um algoritmo que utiliza-se das definições básicas de estatística, média, 
+moda e mediana, para tentar extrair infomrações de conjuntos numéricos simples.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "cabecalho.h"
