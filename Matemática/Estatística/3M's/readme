@@ -1,3 +1,3 @@
 O algoritmo é simples, uma estrutura de dados guardará, para cada conjunto de dados, um ponto correspondente no R^3 que será definido, respectivamente, pelos componenetes 
 moda, média e mediana dos conjuntos numéricos dados. Em seguida, ele verificará e indicará qual desses pontos é mais próximo de um determinado ponto dado, por didática foi 
-escolhidaa origem (0,0,0).
+escolhida a origem (0,0,0).
