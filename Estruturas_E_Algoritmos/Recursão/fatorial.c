@@ -17,7 +17,7 @@ int fatorial(int n){
 
 int main(){
 	int n;
-	printf("Digite qual valor n de Fibonacci deseja verificar:\n");
+	printf("Digite qual valor n de deseja calcular fatorial:\n");
 	scanf("%d",&n);
 
 	int fatorial_n = fatorial(n);
