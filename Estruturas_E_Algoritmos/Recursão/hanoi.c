@@ -1,5 +1,5 @@
 //Autor: Tony Esaú de Oliveira© CC
-//26/02/2024
+//26/02/2025
 /*
   Implementa um algoritmo simples que resolve o problema da Torre de Hanoi 
   com n discos, com base no livro Estruturas de Dados e Seus Algoritmos de 
